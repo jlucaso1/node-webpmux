@@ -8,12 +8,13 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/ApeironTsuka/node-webpmux.git"
+    "url": "git+https://github.com/jlucaso1/node-webpmux.git"
   },
-  "author": "ApeironTsuka",
+  "author": "jlucaso1",
   "license": "LGPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/ApeironTsuka/node-webpmux/issues"
+    "url": "https://github.com/jlucaso1/node-webpmux/issues"
   },
-  "homepage": "https://github.com/ApeironTsuka/node-webpmux#readme"
+  "homepage": "https://github.com/jlucaso1/node-webpmux#readme",
+  "files": ["libwebp/libwebp.js", "libwebp/libwebp.d.ts", "libwebp/libwebp.wasm", "webp.js", "io.js", "libwebp.js", "bin", "parser.js", "README.md", "package.json"]
 }

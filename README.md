@@ -1,5 +1,11 @@
 # node-webpmux
 
+The original project: https://github.com/ApeironTsuka/node-webpmux
+All credits go to the team of libwebp, emsdk and ApeironTsuka.
+
+This forks include the latest version of libwep: 1.5.0 and compiled with latest emsdk 4.0.5.
+It also includes flag optimization to size and speed of the wasm file and generate a d.ts file.
+
 A mostly-complete pure Javascript re-implementation of webpmux.<br />
 Can load "simple" lossy/lossless images as well as animations.
 
