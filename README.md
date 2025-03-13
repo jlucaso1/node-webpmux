@@ -317,7 +317,34 @@ Note that, at the moment, only *static* images are supported in this function.
 
 [get/set]ImageData and [get/set]FrameData are powered by Google's official libwebp library obtained from the [GitHub mirror](https://github.com/webmproject/libwebp).<br />
 Commit 89c5b91 was the latest at the time of compilation.<br />
-This library was compiled with Emscripten with the command `emcc -O3 -s WASM=1 -s MODULARIZE -s EXPORTED_RUNTIME_METHODS='[cwrap]' -s ALLOW_MEMORY_GROWTH=1 -s EXPORT_NAME=LibWebP -DHAVE_CONFIG_H -I libwebp binding.cpp libwebp/src/{dec,dsp,demux,enc,mux,utils}/*.c libwebp/sharpyuv/*.c --bind -o libwebp.js`.<br />
+This library was compiled with Emscripten with the command.
+```bash
+emcc \
+  -Oz \
+  -s WASM=1 \
+  -s EVAL_CTORS=1 \
+  -s EXPORTED_RUNTIME_METHODS='["cwrap", "getValue", "setValue"]' \
+  -s EXPORTED_FUNCTIONS='["_decodeRGBA", "_decodeFree", "_allocBuffer", "_destroyBuffer"]' \
+  -s ALLOW_MEMORY_GROWTH=1 \
+  -s ENVIRONMENT='node' \
+  -s MODULARIZE=1 \
+  -s EXPORT_NAME='WebpModule' \
+  --emit-tsd ./libwebp.d.ts \
+  -Ilibwebp \
+  -flto \
+  -sFILESYSTEM=0 \
+  -o libwebp.js \
+  binding.cpp \
+  libwebp/src/dec/*.c \
+  libwebp/src/demux/*.c \
+  libwebp/src/dsp/*.c \
+  libwebp/src/enc/*.c \
+  libwebp/src/mux/*.c \
+  libwebp/src/utils/*.c \
+  libwebp/sharpyuv/*.c \
+  --bind
+```
+<br />
 binding.cpp is a shim I wrote to bridge the needed parts together and can be found in the libwebp/ directory.
 libwebp.js, found in the root, is the Javascript interface to it.
 
